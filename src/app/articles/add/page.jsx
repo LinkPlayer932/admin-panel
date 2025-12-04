@@ -334,7 +334,7 @@ export default function AddArticle() {
             disabled={submitting}
             className="bg-blue-600 text-white px-6 py-3 rounded shadow hover:bg-blue-700 transition disabled:opacity-50"
           >
-            {submitting ? "Saving..." : "Save Article"}
+            {submitting ? "Saving..." : "Publish Article"}
           </button>
         </form>
       </div>
