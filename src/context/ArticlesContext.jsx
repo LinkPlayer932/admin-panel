@@ -107,7 +107,7 @@ export function ArticlesProvider({ children }) {
   // -----------------------------
   const fetchArticles = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/articles");
+      const res = await fetch("https://nest-solution-backend.vercel.app/api/articles");
       if (!res.ok) {
         console.error("Fetch Error - status:", res.status);
         return;
@@ -132,7 +132,7 @@ export function ArticlesProvider({ children }) {
     try {
       // If caller passed a FormData — context will make the POST
       if (payload instanceof FormData) {
-        const res = await fetch("http://localhost:5000/api/articles", {
+        const res = await fetch("https://nest-solution-backend.vercel.app/api/articles", {
           method: "POST",
           body: payload,
         });
@@ -170,7 +170,7 @@ export function ArticlesProvider({ children }) {
     try {
       // If caller provided FormData, send to backend
       if (formDataOrObj instanceof FormData) {
-        const res = await fetch(`http://localhost:5000/api/articles/${id}`, {
+        const res = await fetch(`https://nest-solution-backend.vercel.app/api/articles/${id}`, {
           method: "PUT",
           body: formDataOrObj,
         });
@@ -206,7 +206,7 @@ export function ArticlesProvider({ children }) {
   // -----------------------------
   const deleteArticle = async (id) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/articles/${id}`, {
+      const res = await fetch(`https://nest-solution-backend.vercel.app/api/articles/${id}`, {
         method: "DELETE",
       });
 

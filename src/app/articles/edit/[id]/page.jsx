@@ -343,7 +343,7 @@ export default function EditArticle() {
   useEffect(() => {
     async function fetchArticle() {
       try {
-        const res = await fetch(`http://localhost:5000/api/articles/${id}`);
+        const res = await fetch(`https://nest-solution-backend.vercel.app/api/articles/${id}`);
         const data = await res.json();
 
         setTitle(data.title || "");
@@ -397,7 +397,7 @@ export default function EditArticle() {
     }
 
     try {
-      await fetch(`http://localhost:5000/api/articles/${id}`, {
+      await fetch(`https://nest-solution-backend.vercel.app/api/articles/${id}`, {
         method: "PUT",
         body: formData,
       });
