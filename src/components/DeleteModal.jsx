@@ -4,10 +4,12 @@ export default function DeleteModal({ show, onClose, onConfirm }) {
   if (!show) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-xl shadow-xl w-80 text-center">
+    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[999] animate-fadeIn">
+      <div className="bg-white w-96 p-6 rounded-xl shadow-xl animate-scaleIn text-center">
         <h2 className="text-xl font-bold mb-3">Confirm Delete</h2>
-        <p className="text-gray-600 mb-6">Are you sure you want to delete this article?</p>
+        <p className="text-gray-600 mb-6">
+          Are you sure you want to delete this article?
+        </p>
 
         <div className="flex justify-center gap-4">
           <button
