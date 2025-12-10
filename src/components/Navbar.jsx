@@ -14,14 +14,18 @@ export default function Navbar() {
         />
       </div>
 
-      {/* Profile Section */}
-      <div className="flex items-center gap-3">
-        <span className="font-medium text-white">Admin</span>
-        <img
-          src="https://i.pravatar.cc/40"
-          className="w-10 h-10 rounded-full object-cover border"
-        />
-      </div>
+      {/* Logout Button */}
+      <button
+        onClick={() => {
+          document.cookie =
+            "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          window.location.href = "/login";
+        }}
+        className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+      >
+        Logout
+      </button>
+
     </nav>
   );
 }
