@@ -158,7 +158,7 @@ export default function Dashboard() {
     if (!isLoggedIn) window.location.href = "/login";
   }, []);
 
-  // Compute dashboard stats
+  // Dashboard stats
   const stats = useMemo(() => {
     const total = articles.length;
     const withImages = articles.filter((a) => a.image).length;
@@ -169,26 +169,14 @@ export default function Dashboard() {
   }, [articles]);
 
   return (
-    <div className="p-6 ml-[250px]">
+    <div className="p-6 md:ml-[250px] transition-all">
 
-      {/* 🔥 LOGOUT BUTTON */}
-      {/* <div className="flex justify-end mb-4">
-        <button
-          onClick={() => {
-            document.cookie =
-              "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-            window.location.href = "/login";
-          }}
-          className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
-        >
-          Logout
-        </button>
-      </div> */}
-
-      <h1 className="text-3xl font-extrabold mb-8">Dashboard Overview</h1>
+      <h1 className="text-3xl font-extrabold mb-8 tracking-tight bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+        Dashboard Overview
+      </h1>
 
       {/* TOP STATS */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
         <DashboardCard
           icon={<FileText size={28} />}
           title="Total Articles"
@@ -213,7 +201,7 @@ export default function Dashboard() {
         <DashboardCard
           icon={<TrendingUp size={28} />}
           title="Engagement Growth"
-          value="+12.5%"
+          value={stats.authors}
           color="bg-orange-600"
         />
       </div>
@@ -222,8 +210,8 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-10">
 
         {/* LATEST ARTICLES */}
-        <div className="lg:col-span-2 bg-white/60 backdrop-blur-xl shadow rounded-2xl p-6 border border-white/40">
-          <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+        <div className="lg:col-span-2 bg-white/70 dark:bg-white/10 backdrop-blur-xl shadow-xl rounded-2xl p-6 border border-white/40">
+          <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 text-gray-900">
             <Newspaper size={22} /> Latest Articles
           </h2>
 
@@ -231,11 +219,10 @@ export default function Dashboard() {
             <p className="text-gray-500">No articles created yet.</p>
           ) : (
             <ul className="divide-y">
-
               {articles.slice(-5).reverse().map((a) => (
                 <li
                   key={a._id}
-                  className="py-4 flex justify-between items-center"
+                  className="py-4 flex justify-between items-center hover:bg-gray-50 px-2 rounded-xl transition"
                 >
                   <div>
                     <h3 className="font-semibold text-gray-900">{a.title}</h3>
@@ -247,26 +234,27 @@ export default function Dashboard() {
                   {a.image && (
                     <img
                       src={typeof a.image === "string" ? a.image : ""}
-                      className="w-16 h-16 rounded object-cover"
+                      className="w-16 h-16 rounded-xl object-cover shadow"
                       alt="thumbnail"
                     />
                   )}
                 </li>
               ))}
-
             </ul>
           )}
         </div>
 
         {/* SUMMARY BOX */}
-        <div className="bg-white/60 backdrop-blur-xl shadow rounded-2xl p-6 border border-white/40">
-          <h2 className="text-xl font-bold mb-3">Summary</h2>
+        <div className="bg-white/70 dark:bg-white/10 backdrop-blur-xl shadow-xl rounded-2xl p-6 border border-white/40">
+          <h2 className="text-xl font-semibold mb-3 text-gray-900">
+            Summary
+          </h2>
 
           <p className="text-gray-700 mb-4">
             Quick overview of your articles and performance.
           </p>
 
-          <ul className="space-y-3 text-gray-600">
+          <ul className="space-y-3 text-gray-700">
             <li>• Total articles published: {stats.total}</li>
             <li>• Articles with images: {stats.withImages}</li>
             <li>• Unique authors: {stats.authors}</li>
@@ -281,11 +269,14 @@ export default function Dashboard() {
 /* CARD COMPONENT */
 function DashboardCard({ icon, title, value, color }) {
   return (
-    <div className="bg-white/60 backdrop-blur-xl border border-white/40 shadow rounded-2xl p-6 flex items-center gap-4 hover:shadow-xl hover:scale-[1.02] transition-all">
-      <div className={`p-4 text-white rounded-xl ${color}`}>{icon}</div>
+    <div className="bg-white/70 backdrop-blur-xl border border-white/40 shadow-xl rounded-2xl p-6 flex items-center gap-4 hover:shadow-2xl hover:scale-[1.03] transition-all duration-300">
+      <div className={`p-4 text-white rounded-xl ${color} shadow-md`}>
+        {icon}
+      </div>
+
       <div>
         <p className="text-gray-600 text-sm">{title}</p>
-        <h2 className="text-3xl font-bold">{value}</h2>
+        <h2 className="text-3xl font-bold text-gray-900">{value}</h2>
       </div>
     </div>
   );
