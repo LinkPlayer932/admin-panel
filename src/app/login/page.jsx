@@ -170,7 +170,7 @@ export default function LoginPage() {
           >
             Login
           </button>
-
+          
           <p className="text-center text-gray-300 text-sm">
             Don't have an account?
             <a href="/signup" className="text-blue-400 hover:underline">

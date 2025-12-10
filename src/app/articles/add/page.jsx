@@ -1,180 +1,4 @@
 
-// "use client";
-
-// import { useState, useContext } from "react";
-// import { ArticlesContext } from "@/context/ArticlesContext";
-// import { useRouter } from "next/navigation";
-
-// export default function AddArticle() {
-//   const [activeTab, setActiveTab] = useState("general");
-
-//   const [title, setTitle] = useState("");
-//   const [subtitle, setSubtitle] = useState("");
-//   const [content, setContent] = useState("");
-//   const [author, setAuthor] = useState("");
-//   const [image, setImage] = useState(null);
-
-//   const [metaTitle, setMetaTitle] = useState("");
-//   const [metaDescription, setMetaDescription] = useState("");
-//   const [keywords, setKeywords] = useState("");
-
-//   const { addArticle } = useContext(ArticlesContext);
-//   const router = useRouter();
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-
-//     const formData = new FormData();
-//     formData.append("title", title);
-//     formData.append("subtitle", subtitle);
-//     formData.append("content", content);
-//     formData.append("author", author);
-
-//     if (image) {
-//       formData.append("image", image);
-//     }
-
-//     formData.append("metaTitle", metaTitle);
-//     formData.append("metaDescription", metaDescription);
-//     formData.append("keywords", keywords);
-
-//     try {
-//       const res = await fetch("http://localhost:5000/api/articles", {
-//         method: "POST",
-//         body: formData,
-//       });
-
-//       // --- FIX 1: If backend returns error (HTML), show text instead of crashing
-//       if (!res.ok) {
-//         const errorText = await res.text();
-//         console.error("SERVER ERROR RAW:", errorText);
-//         alert("Server returned error: " + errorText);
-//         return;
-//       }
-
-//       // --- FIX 2: Prevent JSON parsing crash
-//       let savedArticle;
-//       try {
-//         savedArticle = await res.json();
-//       } catch (err) {
-//         const raw = await res.text();
-//         console.error("JSON PARSE FAILED — RAW RESPONSE:", raw);
-//         alert("Backend returned non-JSON response.");
-//         return;
-//       }
-
-//       addArticle(savedArticle);
-//       router.push("/articles");
-//     } catch (error) {
-//       console.error("Submit Error:", error);
-//     }
-//   };
-
-//   return (
-//     <div className="flex min-h-screen bg-gray-100">
-//       <div className="w-64 bg-white border-r shadow-sm">
-//         <h2 className="p-4 text-lg font-semibold border-b">Settings</h2>
-
-//         <ul className="flex flex-col">
-//           <li
-//             className={`p-4 cursor-pointer border-b hover:bg-gray-50 ${
-//               activeTab === "general" ? "bg-gray-100 font-semibold" : ""
-//             }`}
-//             onClick={() => setActiveTab("general")}
-//           >
-//             General
-//           </li>
-
-//           <li
-//             className={`p-4 cursor-pointer border-b hover:bg-gray-50 ${
-//               activeTab === "seo" ? "bg-gray-100 font-semibold" : ""
-//             }`}
-//             onClick={() => setActiveTab("seo")}
-//           >
-//             SEO Settings
-//           </li>
-//         </ul>
-//       </div>
-
-//       <div className="flex-1 p-10">
-//         <h1 className="text-3xl font-bold mb-6">Add New Article</h1>
-
-//         <form onSubmit={handleSubmit} className="space-y-5">
-//           {activeTab === "general" && (
-//             <div className="grid gap-4 max-w-2xl">
-//               <input
-//                 className="border p-3 rounded bg-white shadow-sm"
-//                 placeholder="Article Title"
-//                 value={title}
-//                 onChange={(e) => setTitle(e.target.value)}
-//                 required
-//               />
-
-//               <input
-//                 className="border p-3 rounded bg-white shadow-sm"
-//                 placeholder="Subtitle"
-//                 value={subtitle}
-//                 onChange={(e) => setSubtitle(e.target.value)}
-//               />
-
-//               <input
-//                 className="border p-3 rounded bg-white shadow-sm"
-//                 placeholder="Author Name"
-//                 value={author}
-//                 onChange={(e) => setAuthor(e.target.value)}
-//                 required
-//               />
-
-//               <input
-//                 type="file"
-//                 className="border p-3 rounded bg-white shadow-sm"
-//                 accept="image/*"
-//                 onChange={(e) => setImage(e.target.files[0])}
-//               />
-
-//               <textarea
-//                 className="border p-3 rounded h-40 bg-white shadow-sm"
-//                 placeholder="Write your article..."
-//                 value={content}
-//                 onChange={(e) => setContent(e.target.value)}
-//                 required
-//               ></textarea>
-//             </div>
-//           )}
-
-//           {activeTab === "seo" && (
-//             <div className="grid gap-4 max-w-2xl">
-//               <input
-//                 className="border p-3 rounded bg-white shadow-sm"
-//                 placeholder="Meta Title"
-//                 value={metaTitle}
-//                 onChange={(e) => setMetaTitle(e.target.value)}
-//               />
-
-//               <textarea
-//                 className="border p-3 rounded bg-white shadow-sm h-24"
-//                 placeholder="Meta Description"
-//                 value={metaDescription}
-//                 onChange={(e) => setMetaDescription(e.target.value)}
-//               />
-
-//               <input
-//                 className="border p-3 rounded bg-white shadow-sm"
-//                 placeholder="Keywords (comma separated)"
-//                 value={keywords}
-//                 onChange={(e) => setKeywords(e.target.value)}
-//               />
-//             </div>
-//           )}
-
-//           <button className="bg-blue-600 text-white px-6 py-3 rounded shadow hover:bg-blue-700 transition">
-//             Save Article
-//           </button>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }
 
 "use client";
 
@@ -234,7 +58,7 @@ export default function AddArticle() {
 
   return (
     <div className="flex min-h-screen bg-gray-100">
-      <div className="w-64 bg-white border-r shadow-sm">
+      <div className="w-full md:w-64 bg-white border-r shadow-sm">
         <h2 className="p-4 text-lg font-semibold border-b">Settings</h2>
 
         <ul className="flex flex-col">
@@ -258,7 +82,7 @@ export default function AddArticle() {
         </ul>
       </div>
 
-      <div className="flex-1 p-10">
+      <div className="flex-1 p-5 md:p-10">
         <h1 className="text-3xl font-bold mb-6">Add New Article</h1>
 
         <form onSubmit={handleSubmit} className="space-y-5">

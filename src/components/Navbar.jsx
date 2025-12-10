@@ -1,16 +1,62 @@
-export default function Navbar() {
+// export default function Navbar() {
+//   return (
+//     <nav className="flex items-center justify-between px-6 py-4 bg-gray-800 shadow sticky top-0 z-10">
+
+//       {/* Logo */}
+//       <div className="text-2xl font-bold text-white">MyAdmin</div>
+
+//       {/* Search Bar */}
+//       <div className="flex-1 mx-10">
+//         <input
+//           type="text"
+//           placeholder="Search..."
+//           className="w-full px-4 py-2 border border-amber-100 bg-white rounded-md focus:ring-2 focus:ring-blue-500"
+//         />
+//       </div>
+
+//       {/* Logout Button */}
+//       <button
+//         onClick={() => {
+//           document.cookie =
+//             "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+//           window.location.href = "/login";
+//         }}
+//         className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+//       >
+//         Logout
+//       </button>
+
+//     </nav>
+//   );
+// }
+"use client";
+
+import { useState } from "react";
+import { Menu, X } from "lucide-react"; // icons
+
+export default function Navbar({ toggleSidebar }) {
+  const [open, setOpen] = useState(false);
+
   return (
-    <nav className="flex items-center justify-between px-6 py-4 bg-gray-800 shadow sticky top-0 z-10">
+    <nav className="flex items-center justify-between px-4 py-4 bg-gray-800 shadow sticky top-0 z-20">
+
+      {/* Mobile Menu Button */}
+      <button
+        className="text-white lg:hidden"
+        onClick={toggleSidebar}
+      >
+        <Menu size={28} />
+      </button>
 
       {/* Logo */}
       <div className="text-2xl font-bold text-white">MyAdmin</div>
 
-      {/* Search Bar */}
-      <div className="flex-1 mx-10">
+      {/* Search Bar (only desktop) */}
+      <div className="hidden lg:block flex-1 mx-10">
         <input
           type="text"
           placeholder="Search..."
-          className="w-full px-4 py-2 border border-amber-100 bg-white rounded-md focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border bg-white rounded-md focus:ring-2 focus:ring-blue-500"
         />
       </div>
 
@@ -21,11 +67,10 @@ export default function Navbar() {
             "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
           window.location.href = "/login";
         }}
-        className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+        className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition hidden sm:block"
       >
         Logout
       </button>
-
     </nav>
   );
 }

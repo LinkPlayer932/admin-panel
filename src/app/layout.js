@@ -1,31 +1,3 @@
-// 'use client';
-// import "./globals.css";
-// import { ArticlesProvider } from "@/context/ArticlesContext";
-// import Navbar from "../components/Navbar";
-// import Sidebar from "../components/Sidebar";
-// // import { Toaster } from "react-hot-toast";
-
-// export const metadata = {
-//   title: "Admin Panel",
-//   description: "Admin panel dashboard",
-// };
-
-// export default function RootLayout({ children }) {
-//   return (
-//     <html lang="en">
-//       <body>
-//         {/* <Toaster position="top-right" /> */}
-//         <ArticlesProvider>
-//           <Sidebar />
-//           <div className="flex-1">
-//             <Navbar />
-//             <main>{children}</main>
-//           </div>
-//         </ArticlesProvider>
-//       </body>
-//     </html>
-//   );
-// }
 'use client';
 import "./globals.css";
 import { ArticlesProvider } from "@/context/ArticlesContext";
@@ -54,3 +26,5 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
+
