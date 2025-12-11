@@ -59,3 +59,25 @@ body {
     transform: scale(0.9);
   }
 }
+
+/* --- Desktop: Hide Scrollbar --- */
+.form-container {
+  overflow-y: scroll;
+  scrollbar-width: none;   /* Firefox */
+}
+
+.form-container::-webkit-scrollbar {
+  display: none;           /* Chrome, Safari */
+}
+
+/* --- Mobile: Show Scrollbar (max-width: 768px) --- */
+@media (max-width: 768px) {
+  .form-container {
+    scrollbar-width: auto; /* Firefox */
+  }
+
+  .form-container::-webkit-scrollbar {
+    display: block;        /* Chrome, Safari */
+    width: 6px;
+  }
+}
