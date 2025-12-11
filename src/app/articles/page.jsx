@@ -5,7 +5,16 @@
 // import { ArticlesContext } from "@/context/ArticlesContext";
 // import Link from "next/link";
 // import { Edit, Trash2 } from "lucide-react";
-// import DeleteModal from "@/components/DeleteModal"; // <-- add this
+// import DeleteModal from "@/components/DeleteModal";
+
+// // 🔹 Small Loader (simple spinner)
+// function SmallLoader() {
+//   return (
+//     <div className="flex justify-center py-5">
+//       <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+//     </div>
+//   );
+// }
 
 // function ArticleCard({ article, onDeleteClick }) {
 //   const [preview, setPreview] = useState(null);
@@ -40,22 +49,30 @@
 //   }, [article.image]);
 
 //   return (
-//     <div className="bg-white/60 backdrop-blur-xl shadow-lg rounded-2xl border border-white/40 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 overflow-hidden flex flex-col">
-
+//     <div className="bg-white/60 backdrop-blur-xl shadow-lg rounded-2xl h-[430px] border  border-white/40 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 overflow-hidden flex flex-col">
 //       {preview ? (
-//         <img src={preview} alt={article.title} className="w-full h-40 object-cover" />
+//         <img
+//           src={preview}
+//           alt={article.title}
+//           className="w-full h-40 object-cover"
+//         />
 //       ) : (
 //         <div className="w-full h-40 bg-gray-100 flex items-center justify-center text-gray-400">
 //           No Image
 //         </div>
 //       )}
 
-//       <div className="p-5 flex flex-col flex-grow">
-//         <h2 className="text-xl font-bold">{article.title}</h2>
-//         <p className="text-gray-600 text-sm mt-1">{article.subtitle}</p>
+//       <div className="p-5 flex flex-col">
+//         <h2 className="text-xl font-bold line-clamp-2">{article.title}</h2>
+//         <p className="text-gray-600 text-sm mt-1 line-clamp-2">
+//           {article.subtitle}
+//         </p>
+
 //         <p className="text-gray-500 text-xs mt-1">✍️ {article.author}</p>
 
-//         <p className="text-gray-700 mt-3 line-clamp-3 text-sm">{article.content}</p>
+//         <p className="text-gray-700 mt-3 text-sm line-clamp-2">
+//           {article.content}
+//         </p>
 
 //         <div className="flex justify-between mt-5 pt-3 border-t">
 //           <Link
@@ -80,7 +97,6 @@
 // export default function ArticlesPage() {
 //   const { articles, deleteArticle } = useContext(ArticlesContext);
 
-//   // Modal states
 //   const [showModal, setShowModal] = useState(false);
 //   const [selectedId, setSelectedId] = useState(null);
 
@@ -97,7 +113,6 @@
 
 //   return (
 //     <div className="p-6 md:ml-[250px] ml-0">
-
 //       <div className="flex justify-between items-center mb-8">
 //         <h1 className="text-3xl font-extrabold tracking-tight">All Articles</h1>
 
@@ -111,6 +126,7 @@
 
 //       {articles.length === 0 ? (
 //         <div className="text-center text-gray-600 py-10 text-lg">
+//           <SmallLoader />
 //           No articles available.
 //         </div>
 //       ) : (
@@ -125,7 +141,6 @@
 //         </div>
 //       )}
 
-//       {/* Delete Modal */}
 //       <DeleteModal
 //         show={showModal}
 //         onClose={() => setShowModal(false)}
@@ -142,7 +157,7 @@ import Link from "next/link";
 import { Edit, Trash2 } from "lucide-react";
 import DeleteModal from "@/components/DeleteModal";
 
-// 🔹 Small Loader (simple spinner)
+// Small Loader
 function SmallLoader() {
   return (
     <div className="flex justify-center py-5">
@@ -151,6 +166,9 @@ function SmallLoader() {
   );
 }
 
+// -----------------------------------------------
+// OPTIMIZED, FIX HEIGHT, MODERN ARTICLE CARD
+// -----------------------------------------------
 function ArticleCard({ article, onDeleteClick }) {
   const [preview, setPreview] = useState(null);
 
@@ -184,34 +202,42 @@ function ArticleCard({ article, onDeleteClick }) {
   }, [article.image]);
 
   return (
-    <div className="bg-white/60 backdrop-blur-xl shadow-lg rounded-2xl border border-white/40 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 overflow-hidden flex flex-col">
+    <div className="flex flex-col bg-white/70 backdrop-blur-xl border border-white/40 shadow-lg rounded-2xl overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300 h-[500px]">
 
+      {/* Image */}
       {preview ? (
-        <img src={preview} alt={article.title} className="w-full h-40 object-cover" />
+        <img src={preview} alt={article.title} className="w-full h-48 object-cover" />
       ) : (
-        <div className="w-full h-40 bg-gray-100 flex items-center justify-center text-gray-400">
+        <div className="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-400">
           No Image
         </div>
       )}
 
-      <div className="p-5 flex flex-col flex-grow">
-        <h2 className="text-xl font-bold">{article.title}</h2>
-        <p className="text-gray-600 text-sm mt-1">{article.subtitle}</p>
-        <p className="text-gray-500 text-xs mt-1">✍️ {article.author}</p>
+      {/* Content */}
+      <div className="flex flex-col flex-grow p-5">
 
-        <p className="text-gray-700 mt-3 line-clamp-3 text-sm">{article.content}</p>
+        <h2 className="text-lg font-bold line-clamp-2">{article.title}</h2>
 
-        <div className="flex justify-between mt-5 pt-3 border-t">
+        <p className="text-gray-600 text-sm mt-1 line-clamp-2">{article.subtitle}</p>
+
+        <p className="text-gray-500 text-xs mt-2">✍️ {article.author}</p>
+
+        <p className="text-gray-700 text-sm mt-3 line-clamp-3 flex-grow">
+          {article.content}
+        </p>
+
+        {/* Bottom Buttons */}
+        <div className="flex justify-between mt-4 pt-3 border-t">
           <Link
             href={`/articles/edit/${article._id}`}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg"
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
           >
             <Edit size={14} /> Edit
           </Link>
 
           <button
             onClick={() => onDeleteClick(article._id)}
-            className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg"
+            className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
           >
             <Trash2 size={14} /> Delete
           </button>
@@ -221,6 +247,9 @@ function ArticleCard({ article, onDeleteClick }) {
   );
 }
 
+// -----------------------------------------------
+// MAIN PAGE
+// -----------------------------------------------
 export default function ArticlesPage() {
   const { articles, deleteArticle } = useContext(ArticlesContext);
 
@@ -241,6 +270,7 @@ export default function ArticlesPage() {
   return (
     <div className="p-6 md:ml-[250px] ml-0">
 
+      {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-extrabold tracking-tight">All Articles</h1>
 
@@ -252,6 +282,7 @@ export default function ArticlesPage() {
         </Link>
       </div>
 
+      {/* List */}
       {articles.length === 0 ? (
         <div className="text-center text-gray-600 py-10 text-lg">
           <SmallLoader />
@@ -269,6 +300,7 @@ export default function ArticlesPage() {
         </div>
       )}
 
+      {/* Delete Modal */}
       <DeleteModal
         show={showModal}
         onClose={() => setShowModal(false)}
